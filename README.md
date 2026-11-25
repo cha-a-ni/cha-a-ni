@@ -1,18 +1,22 @@
-# 안녕하세요, cha-a-ni입니다 👋
+# cha-a-ni
 
-로봇의 센서 데이터를 지도 위에 표시하고, 지도 위의 시설물 데이터를 경로 탐색에 활용하는 프로젝트를 만들고 있습니다.
+**로봇 관제와 지도 기반 경로 탐색 프로젝트를 개발합니다.**  
+센서 값에서 관제 화면에 표시할 이벤트를 골라내고, 시설물 데이터를 경로 탐색에 쓸 수 있는 가중치로 바꾸는 작업을 해왔습니다.
 
-## 주요 프로젝트
+## 프로젝트
 
-### Scout2Map · 로봇 관제
+### Scout2Map · 실시간 로봇 관제
 
-로봇이 수집한 지도, 위치, 센서 상태를 웹에서 실시간으로 확인하고 위험 이벤트를 지도 위에서 파악할 수 있는 시스템입니다.
+**센서가 감지한 이상을 로봇의 위치와 함께 볼 수 있을까?**
 
-| 저장소 | 기능 | 기술 |
-| --- | --- | --- |
-| [S2M-Web-Monitoring](https://github.com/cha-a-ni/S2M-Web-Monitoring) | 지도·로봇 위치·주행 상태를 실시간으로 표시하는 관제 화면 | React · WebSocket |
-| [S2M-Event-Engine](https://github.com/cha-a-ni/S2M-Event-Engine) | 센서와 주행 상태를 받아 임계값과 심각도를 판정하고 이벤트를 발행 | ROS 2 |
+ROS 2 이벤트 엔진에서 센서 값과 주행 상태를 받아 임계값·지속 시간·심각도를 판정합니다. React 관제 화면에서는 WebSocket으로 받은 지도와 로봇 위치 위에 이벤트를 표시해, 운용자가 어떤 일이 어디서 일어났는지 확인할 수 있습니다.
 
-### [Safe Root Finder](https://github.com/cha-a-ni/safe-root-finder) · 보행 경로 탐색
+[웹 관제 화면](https://github.com/cha-a-ni/S2M-Web-Monitoring) · [ROS 2 이벤트 엔진](https://github.com/cha-a-ni/S2M-Event-Engine)
 
-가로등과 CCTV 위치를 도로 그래프의 가중치에 반영해 보행 경로를 계산하는 프로젝트입니다. Python과 NetworkX로 그래프를 구성하고, Kakao Local API로 주소를 좌표로 변환합니다.
+### Safe Root Finder · 보행 경로 탐색
+
+**도로 길이에 가로등과 CCTV 위치를 더하면 경로 선택이 어떻게 바뀔까?**
+
+교차로와 도로 구간을 NetworkX 그래프로 만들고, 가로등·CCTV 데이터를 도로 구간의 가중치에 반영해 경로를 계산합니다. Kakao Local API는 주소를 좌표로 바꾸는 데 사용합니다.
+
+[경로 탐색 코드](https://github.com/cha-a-ni/safe-root-finder)
